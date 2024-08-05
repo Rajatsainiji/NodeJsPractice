@@ -56,6 +56,26 @@ app.get('/api/usersdata', (req , res) => {
     res.json(uniqData);
 });
 
+app.get('/api/usersdata/id', (req , res) => {
+    const uniqData = users.map((product) => {
+        const {id,name} = product;
+        return {id,name}
+    })
+    res.json(uniqData);
+});
+
+app.get('/api/parm/:id', (req, res) => {
+    const {id} = req.params;
+    console.log(id);
+    const singelData = users.find((product) => product.id === parseInt(id));
+    if(!singelData){
+       return res.status(404).send('not found');
+    }
+    res.json(singelData);
+})
+
+
+
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
