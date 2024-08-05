@@ -38,15 +38,22 @@ app.get('/jsonList', (req, res) => {
     res.json(users);
 });
 
-app.get('/Api', (req, res)=>{
-    res.send('<h1>Home</h1><a href="/api/users">home</a>')
-})
+app.get('/api', (req, res) => {
+    res.send('<h1>Home</h1><a href="/api/users">home</a>');
+});
 
-app. get ('/api/users/:userId', (req, res) => {
-    const newItem = users.map((product) => {
-        const { id, name} = product;
-        return { id, name};
+
+app.get('/api/users/2', (req , res) => {
+    const uniqData = users.find((data) => data.id === 2 )
+    res.json(uniqData);
+});
+
+app.get('/api/usersdata', (req , res) => {
+    const uniqData = users.map((product) => {
+        const {id,name} = product;
+        return {id,name}
     })
+    res.json(uniqData);
 });
 
 app.listen(port, () => {
